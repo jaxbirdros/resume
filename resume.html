@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jaylyn | Resume</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* Hide scrollbar */
+  html { scrollbar-width: none; }
+  html::-webkit-scrollbar { display: none; }
+
+  :root {
+    --navy: #0f1f38;
+    --gold: #c8a96e;
+    --cream: #faf8f4;
+    --light-bg: #f4f1eb;
+    --muted: #6b7280;
+    --border: #e5e0d6;
+    --text: #1a1a2e;
+  }
+
+  body {
+    background: var(--light-bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── Nav ── */
+  nav {
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 36px;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── Hero ── */
+  .hero {
+    background: var(--navy);
+    color: var(--cream);
+    padding: 64px 36px 56px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 6vw, 56px);
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
+  .hero h1 em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 6px;
+  }
+
+  .hero-email {
+    font-size: 14px;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  .gold-line {
+    width: 48px;
+    height: 1.5px;
+    background: var(--gold);
+    margin: 20px auto;
+    opacity: 0.6;
+  }
+
+  /* ── Dark mode toggle ── */
+  .dark-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--navy);
+    color: var(--gold);
+    border: 1.5px solid var(--gold);
+    padding: 8px 16px;
+    border-radius: 2px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    z-index: 200;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .dark-toggle:hover { background: var(--gold); color: var(--navy); }
+
+  /* ── Main layout ── */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* ── Section cards ── */
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+
+  .card-header:hover { background: #fdfaf5; }
+
+  .card-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    color: var(--navy);
+  }
+
+  .chevron {
+    width: 16px;
+    height: 16px;
+    border-right: 1.5px solid var(--gold);
+    border-bottom: 1.5px solid var(--gold);
+    transform: rotate(45deg);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .card.open .chevron { transform: rotate(225deg); }
+
+  .card-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+    border-top: 0 solid var(--border);
+  }
+
+  .card.open .card-body {
+    max-height: 800px;
+    border-top-width: 1px;
+  }
+
+  .card-inner {
+    padding: 20px 24px 24px;
+  }
+
+  /* ── Content styles ── */
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  ul li {
+    padding: 5px 0;
+    padding-left: 16px;
+    position: relative;
+    color: #374151;
+  }
+
+  ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 5px;
+    height: 1.5px;
+    background: var(--gold);
+  }
+
+  .entry {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .entry-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+
+  .entry-meta {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .entry p, .entry-note {
+    color: #4b5563;
+    font-size: 14px;
+  }
+
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  strong { font-weight: 500; color: var(--navy); }
+
+  /* ── Dark mode ── */
+  body.dark {
+    background: #6b7d99;
+    color: #eef1f7;
+  }
+
+  body.dark nav {
+    background: #0f1f38;
+  }
+
+  body.dark .hero {
+    background: #0f1f38;
+  }
+
+  body.dark .card {
+    background: #162033;
+    border-color: #1e3050;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+
+  body.dark .card-header:hover { background: #1c2a42; }
+  body.dark .card-header h2 { color: #eef1f7; }
+  body.dark ul li, body.dark .entry p, body.dark .entry-note { color: #b8c5d9; }
+  body.dark .entry-title { color: #eef1f7; }
+  body.dark .card-body { border-top-color: #1e3050; }
+  body.dark .entry { border-bottom-color: #1e3050; }
+  body.dark strong { color: #eef1f7; }
+  body.dark .dark-toggle { background: var(--gold); color: #0f1f38; }
+  body.dark .dark-toggle:hover { background: transparent; color: var(--gold); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Jaylyn</a>
+  <ul class="nav-links">
+    <li><a href="image.html">Gallery</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <h1>Hello, I'm <em>Jaylyn</em></h1>
+  <div class="gold-line"></div>
+  <p class="hero-email"> hackclubexample@gmail.com - XXth - Instrumental guitar - She/Her</p>
+</div>
+
+<main>
+
+  <!-- Skills -->
+  <div class="card" id="skills-card">
+    <div class="card-header" onclick="toggle('skills-card')">
+      <h2>Skills</h2>
+      <div class="chevron"></div>
+    </div>
+    <div class="card-body">
+      <div class="card-inner">
+        <ul>
+          <li>Problem-Solving &amp; Critical Thinking</li>
+          <li>Multilingual — Fluent in English and Spanish</li>
+          <li>Creative &amp; Visual Design</li>
+          <li>Organization &amp; Leadership</li>
+          <li>Collaboration &amp; Teamwork</li>
+          <li>Website Building (HTML / CSS)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Experience -->
+  <div class="card" id="exp-card">
+    <div class="card-header" onclick="toggle('exp-card')">
+      <h2>Experience</h2>
+      <div class="chevron"></div>
+    </div>
+    <div class="card-body">
+      <div class="card-inner">
+        <div class="entry">
+          <p class="entry-title">City Library</p>
+          <p class="entry-meta">June 2025 – Present</p>
+          <p class="entry-note">Volunteer — 4 hours completed</p>
+        </div>
+        <div class="entry">
+          <p class="entry-title">Hearts for the Hungry</p>
+          <p class="entry-meta">June 2024 – Present</p>
+          <p class="entry-note">Volunteer — 18 hours completed · Church-organized event feeding community members on Christmas Sunday · Performed live at the event</p>
+        </div>
+        <div class="entry">
+          <p class="entry-title">Girl Scouts — Beach Cleanup</p>
+          <p class="entry-meta">Ongoing</p>
+          <p class="entry-note">Volunteer — Environmental service removing trash from local beach as part of Girl Scouts community outreach</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projects -->
+  <div class="card" id="proj-card">
+    <div class="card-header" onclick="toggle('proj-card')">
+      <h2>Projects</h2>
+      <div class="chevron"></div>
+    </div>
+    <div class="card-body">
+      <div class="card-inner">
+        <ul>
+          <li>Planning Girl Scouts Gold Award — exploring a STEAM education project for young kids in the community (in progress)</li>
+          <li>Built a hobby land rover robot with sensors and Arduino integration — independently exploring robotics and electronics</li>
+          <li> Green belt taquando- planing to earn black belt</li>
+          <li>Automated Starlord mask</li>
+          <li>Built a working laptop from components</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Education -->
+  <div class="card" id="edu-card">
+    <div class="card-header" onclick="toggle('edu-card')">
+      <h2>Education</h2>
+      <div class="chevron"></div>
+    </div>
+    <div class="card-body">
+      <div class="card-inner">
+        <div class="entry">
+          <p class="entry-title">School name example</p>
+          <p class="entry-meta">Current</p>
+          <p class="entry-note">GPA: 4.33 &nbsp;·&nbsp; 4 Honors Courses</p>
+        </div>
+        <div class="entry">
+          <p class="entry-title">Example College — Dual Enrollment</p>
+          <p class="entry-meta">Concurrent</p>
+          <ul>
+            <li>Guitar 1 — A</li>
+            <li>Web Design — A</li>
+            <li>Ethnic Studies </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Awards -->
+  <div class="card" id="awards-card">
+    <div class="card-header" onclick="toggle('awards-card')">
+      <h2>Awards &amp; Honors</h2>
+      <div class="chevron"></div>
+    </div>
+    <div class="card-body">
+      <div class="card-inner">
+        <div class="entry">
+          <p class="entry-title">Science Olympiad —   Regionals 2025</p>
+          <p class="entry-note"><strong>3rd Place — Optics</strong> &nbsp;·&nbsp; <a href="https://www.duosmium.org/results/2025-03-01_sCA_la_rhc_regional_b/" target="_blank">View Results ↗</a></p>
+        </div>
+        <div class="entry">
+          <p class="entry-title">Girl Scouts Bronze Award</p>
+        </div>
+        <div class="entry">
+          <p class="entry-title">Girl Scouts Silver Award</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clubs -->
+  <div class="card" id="clubs-card">
+    <div class="card-header" onclick="toggle('clubs-card')">
+      <h2>Clubs &amp; Leadership</h2>
+      <div class="chevron"></div>
+    </div>
+    <div class="card-body">
+      <div class="card-inner">
+        <ul>
+          <li><strong>President</strong> — Robotics Club · Currently leading peer coding workshops to teach members programming fundamentals</li>
+          <li>Producer's Club</li>
+          <li>Science Olympiad</li>
+          <li>UNICEF Club</li>
+          <li>Tri-M Music Honor Society</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Music -->
+  <div class="card" id="music-card">
+    <div class="card-header" onclick="toggle('music-card')">
+      <h2>Music</h2>
+      <div class="chevron"></div>
+    </div>
+    <div class="card-body">
+      <div class="card-inner">
+        <p style="margin-bottom:12px; color:#4b5563;">Instruments: Guitar · Bass · Drums · Piano</p>
+        <ul>
+          <li>Accepted to Instrumental Music (Guitar) for the 2026–2027 school year</li>
+          <li>Active member of 3 bands</li>
+          <li>Performed in the Integrated Arts Variety Show twice</li>
+          <li>Performed live at Hearts for the Hungry community event</li>
+          <li>Teaches guitar and other instruments to peers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<button class="dark-toggle" onclick="document.body.classList.toggle('dark')">Toggle Theme</button>
+
+<script>
+  function toggle(id) {
+    const card = document.getElementById(id);
+    card.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
