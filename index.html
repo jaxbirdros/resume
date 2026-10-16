@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jaylyn | Welcome</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0f1f38;
+    --gold: #c8a96e;
+    --cream: #faf8f4;
+    --muted: #6b7280;
+  }
+
+  html, body {
+    height: 100%;
+    background: var(--navy);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .container {
+    text-align: center;
+    padding: 40px;
+    max-width: 600px;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.9s ease 0.3s forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .monogram {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 28px;
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+
+  .greeting {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 6vw, 48px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    color: var(--cream);
+  }
+
+  .greeting em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .enter-btn {
+    display: inline-block;
+    padding: 14px 40px;
+    border: 1.5px solid var(--gold);
+    color: var(--gold);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .enter-btn:hover {
+    background: var(--gold);
+    color: var(--navy);
+  }
+
+  .divider {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 32px auto;
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="monogram">J</div>
+  <h1 class="greeting">Hi, I'm <em>Jaylyn</em></h1>
+  <div class="divider"></div>
+  <p class="subtitle">Student · Leader · Creator</p>
+  <a href="resume.html" class="enter-btn">View Portfolio</a>
+</div>
+</body>
+</html>
